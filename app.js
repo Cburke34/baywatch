@@ -7,31 +7,23 @@ const app = {
 
     document
       .querySelector(selectors.formSelector)
-      .addEventListener(
-        'submit', 
-        this.handleSubmit.bind(this)
-      )
+      .addEventListener('submit', this.handleSubmit.bind(this))
   },
 
   favFlick(flick, ev) {
     const listItem = ev.target.closest('.flick')
-    flick.fav = !flick.fav
-
-    if (flick.fav) {
-      listItem.classList.add('fav')
-    } else {
-      listItem.classList.remove('fav')
-    }
+    flick.fav = listItem.classList.toggle('fav')
   },
 
   removeFlick(flick, ev) {
+
     // remove from the DOM
     const listItem = ev.target.closest('.flick')
     listItem.remove()
 
     // remove from the array
-    const i = this.flicks.indexOf(flick)
-    this.flicks.splice(i, 1)
+    const l = this.flicks.indexOf(flick)
+    this.flicks.splice(l, 1)
   },
 
   renderListItem(flick) {
@@ -45,17 +37,17 @@ const app = {
     item
       .querySelector('button.remove')
       .addEventListener(
-        'click', 
+        'click',
         this.removeFlick.bind(this, flick)
       )
 
     item
       .querySelector('button.fav')
       .addEventListener(
-        'click', 
+        'click',
         this.favFlick.bind(this, flick)
       )
-    
+
     return item
   },
 
@@ -71,16 +63,21 @@ const app = {
     this.flicks.unshift(flick)
 
     const listItem = this.renderListItem(flick)
-    this.list
-      .insertBefore(listItem, this.list.firstElementChild)
+    this.list.insertBefore(listItem, this.list.firstElementChild)
+    
 
     this.max ++
     f.reset()
   },
 }
 
+    //test
+    // localStorage()
+    //test
+
 app.init({
   formSelector: 'form#flick-form',
   listSelector: '#flick-list',
-  templateSelector: '.flick.template',
+  templateSelector: '.flick.template'
+
 })
