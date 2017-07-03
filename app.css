@@ -56,3 +56,8 @@ h1 small {
 .flick .actions.button-group {
   margin-bottom: 0;
 }
+
+.input-filter-button {
+  text-align: right;
+  margin-bottom: 0;
+}
